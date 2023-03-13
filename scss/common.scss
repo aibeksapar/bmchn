@@ -1,0 +1,20 @@
+// Заголовки, общие БЄМ блоки и проче...
+
+.btn {
+	user-select: none;
+  -webkit-tap-highlight-color: transparent;
+	cursor: pointer;
+	padding: 10px 7px 12px 9px;
+
+	color: #000;
+	font-size: 18px;
+	@include adaptiveValue("font-size", 18, 15, 1);
+	font-weight: 900;
+	text-decoration: none;
+
+	border: 1px solid #000000;
+	border-radius: 28px;
+	background: rgb(255, 234, 1);
+
+	transition: all .3s ease 0s;
+}
