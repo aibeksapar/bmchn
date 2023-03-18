@@ -189,20 +189,24 @@ export class FullPage {
 		this.activeSection.classList.add(this.options.activeClass);
 
 		if (this.activeSection.classList.contains('footer')) {
+			document.body.classList = '';
 			document.body.classList.add('ft-act');
 		}  else if (!this.activeSection.classList.contains('footer')) {
-			document.body.classList.remove('ft-act');
+			document.body.classList = '';
 		}
 
 		if (this.activeSection.classList.contains('store')) {
-			document.body.classList.remove('page-academy');
+			document.body.classList = '';
 			document.body.classList.add('page-store');
 		} else if (this.activeSection.classList.contains('academy')) {
-			document.body.classList.remove('page-store');
+			document.body.classList = '';
 			document.body.classList.add('page-academy');
-		} else {
-			document.body.classList.remove('page-store');
-			document.body.classList.remove('page-academy');
+		} else if (this.activeSection.classList.contains('intro')) {
+			document.body.classList = '';
+			document.body.classList.add('page-intro');
+		} else if (this.activeSection.classList.contains('stats')) {
+			document.body.classList = '';
+			document.body.classList.add('page-stats');
 		}
 
 		// Установка класса и присваение элемента для ПРЕДЫДУЩЕГО слайда
@@ -303,10 +307,10 @@ export class FullPage {
 	styleCards() {
 		for (let index = 0; index < this.sections.length; index++) {
 			const section = this.sections[index];
-			if (index >= this.activeSectionId) {
+			if (index > this.activeSectionId) {
+				section.style.transform = 'translate3D(0,100%,0)';
+			} else if (index <= this.activeSectionId) {
 				section.style.transform = 'translate3D(0,0,0)';
-			} else if (index < this.activeSectionId) {
-				section.style.transform = 'translate3D(0,-100%,0)';
 			}
 		}
 	}
@@ -442,10 +446,12 @@ export class FullPage {
 		for (let index = 0; index < bullets.length; index++) {
 			const bullet = bullets[index];
 			if (idButton === index) {
-				if (idButton !== 2) {
+				if (idButton !== 3 && idButton !== 1) {
 					bullet.classList.add(this.options.bulletActiveClass);
-				} else {
-					bullets[1].classList.add(this.options.bulletActiveClass);
+				} else if (idButton === 3){
+					bullets[2].classList.add(this.options.bulletActiveClass);
+				} else if (idButton === 1) {
+					bullets[0].classList.add(this.options.bulletActiveClass);
 				}
 			}
 			else bullet.classList.remove(this.options.bulletActiveClass);
@@ -593,6 +599,17 @@ export class FullPage {
 			}
 		}));
 
+		if (this.activeSection.classList.contains('stats')) {
+			window.odometerOptions = {
+				// duration: 3000000000000000,
+			};
+			setTimeout(function () {
+				odometer1.innerHTML = 1.1;
+				odometer2.innerHTML = 45;
+				odometer3.innerHTML = 60;
+			}, 200);
+		}
+
 		/// счетчик активной страницы
 		document.querySelector('.pages-header__active').innerHTML = '0' + (idSection + 1);
 		document.querySelector('.select__content').innerHTML = document.querySelector('.active-section').id;
@@ -627,25 +644,22 @@ export class FullPage {
 					switch (index) {
 						case 0:
 							btnBullet.classList.add('bmchn-tab');
-							btnBullet.setAttribute('onclick',"changeHeader('bmchn-tab')");
 							btnBullet.innerHTML = 'BIOMACHINE';
 							break;
 						case 1:
-							btnBullet.classList.add('media-tab');
-							btnBullet.setAttribute('onclick',"changeHeader('media-tab')");
-							btnBullet.innerHTML = 'MEDIA';
-							break;
-						case 2:
+						case 3:
 							btnBullet.style.display = 'none';
 							break;
-						case 3:
-							btnBullet.classList.add('store-tab');
-							btnBullet.setAttribute('onclick',"changeHeader('store-tab')");
-							btnBullet.innerHTML = 'STORE';
+						case 2:
+							btnBullet.classList.add('media-tab');
+							btnBullet.innerHTML = 'MEDIA';
 							break;
 						case 4:
+							btnBullet.classList.add('store-tab');
+							btnBullet.innerHTML = 'STORE';
+							break;
+						case 5:
 							btnBullet.classList.add('academy-tab');
-							btnBullet.setAttribute('onclick',"changeHeader('academy-tab')");
 							btnBullet.innerHTML = 'ACADEMY';
 							break;
 						default:
@@ -659,11 +673,11 @@ export class FullPage {
 	//===============================
 	// Z-INDEX
 	setZIndex() {
-		let zIndex = this.sections.length
+		let zIndex = 0;
 		for (let index = 0; index < this.sections.length; index++) {
 			const section = this.sections[index];
 			section.style.zIndex = zIndex;
-			--zIndex;
+			++zIndex;
 		}
 	}
 	removeZIndex() {

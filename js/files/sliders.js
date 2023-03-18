@@ -27,6 +27,81 @@ import 'swiper/css';
 function initSliders() {
 	// Перечень слайдеров
 	// Проверяем, есть ли слайдер на стронице
+	if (document.querySelector('.swiper-gallery')) {
+		new Swiper('.swiper-gallery', { // Указываем скласс нужного слайдера
+			// Подключаем модули слайдера
+			// для конкретного случая
+			modules: [Keyboard, FreeMode],
+			slidesPerView: 3.3,
+			watchOverflow: true,
+			spaceBetween: 16,
+			autoHeight: true,
+			speed: 300,
+			slideToClickedSlide: false,
+			simulateTouch: true,
+			// freeMode: true,
+			keyboard: {
+				enabled: true,
+				onlyInViewport: true,
+			 },
+
+			//preloadImages: false,
+
+			//Брейкпоинты
+			breakpoints: {
+				320: {
+					slidesPerView: 1.06,
+				},
+				340: {
+					slidesPerView: 1.06,
+				},
+				480: {
+					slidesPerView: 1.07,
+				},
+				560: {
+					slidesPerView: 1.15,
+				},
+				650: {
+					slidesPerView: 1.4,
+				},
+				768: {
+					slidesPerView: 1.6,
+				},
+				700: {
+					slidesPerView: 1.8,
+				},
+				830: {
+					slidesPerView: 2.1,
+				},
+				870: {
+					slidesPerView: 2.4,
+				},
+				900: {
+					slidesPerView: 2.7,
+				},
+				950: {
+					slidesPerView: 2.9,
+				},
+				1024: {
+					slidesPerView: 3.1,
+					spaceBetween: 12,
+				},
+				1120: {
+					slidesPerView: 3.2,
+				},
+				1240: {
+					slidesPerView: 3.3,
+				},
+				1440: {
+					slidesPerView: 3.3,
+					spaceBetween: 12,
+				}
+			},
+			// События
+			on: {
+			}
+		});
+	}
 	if (document.querySelector('.swiper-videos')) { // Указываем скласс нужного слайдера
 		// Создаем слайдер
 		const sliderVideo = new Swiper('.swiper-videos', { // Указываем скласс нужного слайдера
@@ -96,10 +171,15 @@ function initSliders() {
 		});
 		sliderVideo.on('slideChange', function() {
 			let videoTitle = document.querySelector('.main-videos__title');
+			function changeOpacity(elem) {
+				elem.style.opacity = 1;
+			}
 			switch (sliderVideo.realIndex) {
 				case 0:
+					videoTitle.style.opacity = 0;
 					videoTitle.textContent = 'HIIT';
 					videoTitle.href = 'https://youtu.be/eESsBCFthjk';
+					setTimeout(changeOpacity(videoTitle), 2000);
 					break;
 				case 1:
 					videoTitle.textContent = 'Все тело за 4 упражнения';
