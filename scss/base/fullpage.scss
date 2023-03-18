@@ -10,12 +10,15 @@ body {
 // Оболочка секций
 [data-fp] {
 	min-height: 100vh;
+
 	.touch & {
 		min-height: calc(var(--vh, 1vh) * 100);
+
 		@media (max-width: $mobile) {
 			transition: height 0.2s;
 		}
 	}
+
 	.fp-init & {
 		// Для того, чтобы секции не перекрывали буллеты
 		z-index: 1;
@@ -31,6 +34,7 @@ body {
 	.fp-switching & {
 		touch-action: none;
 	}
+
 	.fp-init & {
 		position: absolute;
 		top: 0;
@@ -48,6 +52,7 @@ body {
 	.fp-init .cards-mode & {
 		transition: transform 0.7s cubic-bezier(0.55, 0.085, 0, 0.99) 0s;
 	}
+
 	.fp-init .fade-mode & {
 		transition: opacity 0.5s ease-in-out 0s, visibility 0.5s ease-in-out 0s;
 	}
@@ -64,7 +69,7 @@ body {
 	position: fixed;
 	padding: 4px;
 	bottom: 24px;
-	z-index: 2;
+	z-index: 10;
 	opacity: 1;
 	visibility: visible;
 
@@ -72,10 +77,6 @@ body {
 	backdrop-filter: blur(7.5px);
 	background: rgba(89, 89, 89, 0.2);
 	transform: translateX(-50%);
-
-	@media (max-width: 375px){
-		display: none;
-	}
 
 	.ft-act & {
 		opacity: 0;
@@ -112,10 +113,7 @@ body {
 		}
 	}
 
-	// & .fp-bullet-active {
-	// 	opacity: 1;
-	// 	background-color: #6257fe;
-	// 	transform: translate3D(rem(-5), rem(-2), 0);
-	// 	box-shadow: rem(5) rem(2) rem(3) #100c46, 0 0 rem(30) rgba(255, 255, 255, 0.8);
-	// }
+	@media (max-width: 375px) {
+		display: none;
+	}
 }

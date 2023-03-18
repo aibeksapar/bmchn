@@ -16,7 +16,7 @@
 		background: rgba(89, 89, 89, 0.2);
 		transform: translateX(-50%);
 
-		@media (max-width: 375px){
+		@media (max-width: 375px) {
 			display: none;
 		}
 	}
@@ -36,6 +36,7 @@
 		background-color: transparent;
 
 		transition: all .3s ease 0s;
+
 		&._tab-active {
 			border-radius: 133px;
 			color: $mainColor;
@@ -47,25 +48,16 @@
 			}
 		}
 	}
-	// .tabs__content
-	&__content {
-		// padding: rem(10) rem(15);
-	}
-	// .tabs__body
-	&__body {
-	}
 }
-._tab-spoller {
 
+._tab-spoller {
 	& .tabs__navigation {
 		margin: 0 auto;
 		max-width: 510px;
 		min-height: 30px;
 		padding: 5px 10px;
 		position: fixed;
-		// top: 450px;
 	}
-
 
 	.tabs__title {
 		position: absolute;
